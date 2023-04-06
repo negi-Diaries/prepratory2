@@ -1,0 +1,78 @@
+body{
+    background-color: #DBE4C6;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+.navbar{
+    background-color: #94AF9F;
+    /* width: 100%; */
+}
+
+.coloured_cow_img{
+    height: 2rem;
+}
+
+.formDiv{
+    display: flex;
+    justify-content: center;
+    
+    height: 80vh;
+    align-items: center;
+}
+
+.formDiv_internal{
+    background-color: white;
+    margin: 0 10px 0 10px;
+    padding: 0 2rem;
+    border-radius: 10px;
+    width: 25rem;
+    
+}
+
+.mainHeading{
+    margin-top: 1rem;
+    /* width: 3rem; */
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.input_common{
+    margin-top: 0.5rem;
+}
+
+.inputFeilds{
+    width: 100%;
+    padding: 7px;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid #d1c1c1;
+}
+
+.btn{
+    padding: 10px;
+    width: 100%;
+    letter-spacing: 2px;
+}
+
+.login_paragraph{
+    margin-top: 12px;
+}
+
+.error{
+    color: red;
+}
+
+.genres{
+    color: #ad9e9e;
+}
+
+.outer_element_forgot_pass{
+    text-align: center;
+}
+
+.forgot_pass{
+    text-decoration: none;
+}

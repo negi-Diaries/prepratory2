@@ -1,0 +1,242 @@
+
+body{
+    background-color: #DBE4C6;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+.navbar{
+
+    background-color: #94AF9F;
+}
+
+
+.logo{
+    font-weight: 400;
+}
+
+.detail{
+    text-transform: uppercase;
+    text-align: center;
+    color: #BFACE2;
+
+}
+
+.flexable{
+    display: flex;
+    padding: 1px 5px;
+    flex-wrap: wrap;
+
+}
+
+.flexable a{
+    text-decoration: none;
+}
+
+.bookNamecenter{
+    text-align: center;
+    font-weight: 700;
+}
+
+
+
+span{
+    font-size: 0.8rem;
+}
+
+.book_img{
+    height: 18rem;
+    border-radius: 8px 8px 0 0 ;
+    box-shadow: 0px 4px 8px rgba(0, 0 , 0, 0.5);
+}
+
+
+.card{
+    background-color: #DBE4C6;
+    /* background-color: #94AF9F; */
+    border: none;
+    /* box-shadow: 0px 4px 8px rgba(0, 0 , 0, 0.5); */
+    /* border-radius: 8px; */
+    margin: 1rem; 
+}
+
+/* .book_details{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 5px;
+} */
+
+
+.more{
+    display: flex;
+    justify-content: space-around;
+}
+
+a{
+    color: #3E54AC;
+}
+
+.backButton{
+    color: white;
+    padding: 0;
+}
+
+.add_book{
+    margin-right: 30px;
+}
+
+
+
+
+
+
+h3{
+    margin: 0px;
+}
+
+
+
+  /* form  */
+  /* form section addbooks.php  */
+
+  .formClass{
+    display: flex;
+  }
+
+  @media screen and (max-width: 500px) {
+    .formClass{
+        flex-wrap: wrap;
+    }
+
+ 
+  }
+
+  .imageSection{
+        display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.imageInput{
+    display: block;
+}
+
+/* btn section and .saveBtn  */
+/* sort and add btn */
+
+.sort_add_btn{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 81.5rem;
+}
+
+.edit_delete{
+    justify-content: center;
+}
+  .saveBtn{
+    margin-left: 10px;
+    /* align-items: right; */
+    /* margin-right: 10px; */
+}
+
+.btn_wide{
+      width: 10rem;
+  }
+
+  .back_btn{
+    width: 6rem;
+  }
+
+  .btnSection{
+    display: flex;
+    /* justify-content: flex-end; */
+  }
+
+.inputFeilds label{
+    display: flex;
+}
+
+#uploadFile{
+    background-color: gray;
+}
+
+.imagePreview{
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.readMoreImage{
+    border-radius: 0 17px 17px 0;
+    height: 21rem;
+    width: 19rem;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0 , 0, 0.5);
+}
+
+.pagination{
+    margin-bottom: 0px;
+}
+
+.pagination_main{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.coloured_cow_img{
+    height: 2rem;
+}
+
+.search_logo{
+    margin-right: 4px;
+    height: 1rem;
+    color: white;
+}
+
+.search_btn{
+    display: flex;
+    align-items: center;
+}
+
+
+.sorting_form{
+    width: 18rem;
+}
+
+.mainDiv{
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    /* width: 80rem; */
+}
+
+.sub_header{
+    display: flex;
+    /* justify-content: space-between; */
+    /* justify-content: flex-start; */
+    align-items: center;
+    width: auto;
+}
+
+
+@media screen and (max-width: 700px) {
+    .sub_header{
+        display: flex;
+        /* justify-content: center; */
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: auto;
+    }
+
+    .sort_add_btn{
+        width: auto;
+    }
+ 
+  }
+
+  
