@@ -1,6 +1,6 @@
 <?php
 
-function notifications(){
+function alerts(){
 // echo "hello world this is notification box";
 // there's no need to start the sessin again as it will throw us an error 
 // session_start();
@@ -31,9 +31,25 @@ echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
     </div>";
     unset($_SESSION['sort_null']);
     header("location: home");
-    
+    // form here the registrations starts  session starts
+}else if(isset($_SESSION['email_exists'])){
+        echo "<p class='error' id='emailErr'>".$_SESSION['email_exists']."</p>";
+        unset($_SESSION['email_exists']);
+}elseif(isset($_SESSION['register_success'])){
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+<strong>".$_SESSION['register_success']."<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+unset($_SESSION['register_success']);
+}else if(isset($_SESSION['wrong_empass'])){
+    echo "<p class='error' id='emailErr'>".$_SESSION['wrong_empass']."</p>";
+    unset($_SESSION['wrong_empass']);
+}else if(isset($_SESSION['login_successful'])){
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+    <strong>".$_SESSION['login_successful']."<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>";
+unset($_SESSION['login_successful']);
 }
-// echo "end of the alert box";
+// echo "end of the alert box";    
 }
 
 function show_reset_btn(){

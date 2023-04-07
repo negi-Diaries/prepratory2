@@ -7,6 +7,7 @@ require 'core/Router.php';
 require 'core/Request.php';
 require 'core/database/connection.php';
 require 'core/querybuilder.php';
+require 'controllers/functions.php';
 // connect the database 
 $pdo = connection::make($app['config']['database']);
 $app['pdo_object'] = connection::make($app['config']['database']);

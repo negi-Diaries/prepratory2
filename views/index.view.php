@@ -1,5 +1,7 @@
 <?php
-require 'controllers/functions.php';
+if(!$_SESSION['password']){
+    header('location: login');
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +44,8 @@ require 'controllers/functions.php';
 
                 </form>
                 <?php show_reset_btn(); ?>
+                <a class="btn btn-primary btn_wide mx-2" href="logout">Logout</a>
+                <!-- <button type="submit" class="btn btn-primary btn_wide" name='submit'>Edit</button>  -->
             </div>
         </div>
     </nav>
@@ -49,7 +53,7 @@ require 'controllers/functions.php';
     <div class="notification_box">
         <!-- if someone clicks on the search box with an empty input then an alert will be shown up  -->
         <?php
-        notifications();
+        alerts();
         ?>
     </div>
     <!-- notification box ends -->
@@ -101,7 +105,12 @@ require 'controllers/functions.php';
                 <span>author:</span>
                 <h5 class="card-title"><?php echo $item['author']; ?></h5>
                 <div class="book_details">
-                    <a href="readmore?id=<?php echo $item['id']; ?>">Book details</a>
+                    <!-- <form action="readmore?id=<?php echo $item['id']; ?>" method="POST"> -->
+                        <a href="readmore?id=<?php  echo $item['id']; ?>">Book details</a>
+                        <!-- <input type="submit" name="submit" value="Book Details"> -->
+                        <!-- <a href="readmore?id=<?php// echo $item['id']; ?>">Book details</a> -->
+
+                    <!-- </form> -->
                 </div>
         </div>
         <?php 

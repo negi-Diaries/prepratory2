@@ -126,6 +126,41 @@ class querybuilder{
             $result = $statement->fetchAll();
             return $result;
         }
+// from here the user registration/ login and forgot password starts 
+
+        //   to check if the email is registered or not
+        public function is_email_registered($email){
+            $check_email_query = "SELECT email FROM users WHERE email = :email";
+            $statement = $this->pdo->prepare($check_email_query);
+            $statement->execute([
+                ':email'=>$email
+            ]);
+            $result = $statement->fetch();
+            return $result;
+        }
+
+        public function add_new_user($name,$email,$password){
+            $insert_user_data = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+            $statement = $this->pdo->prepare($insert_user_data);
+            $statement->execute([
+                ':name' => $email,
+                ':email' => $email,
+                ':password' => $password
+            ]);
+            $result = $statement->fetch();
+            return $result;
+        }
+
+        public function authenticate_user_password($email,$password){
+            $query = "SELECT email, password FROM users WHERE email = :email AND password = :password";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([
+                ':email' => $email,
+                ':password' => $password
+            ]);
+            $result = $statement->fetchAll();
+            return $result;
+        }
 
 }
 ?>

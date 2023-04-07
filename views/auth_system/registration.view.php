@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['password'])){
+    header('location: home');
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +48,7 @@
             <h1 class="mainHeading">Sign up</h1>
             <p class="genres">It's quick and easy</p>
             <hr>
-            <form class="form form_container" action=" " method="GET" name="userLogin" onsubmit="return formValidation()">
+            <form class="form form_container" action="code" method="post" name="userLogin" onsubmit="return formValidation()">
                 <div class="mainHeading">
                     <div class="input_common">
                         <input class="inputFeilds" type="text" id="name" name="name" placeholder="Name">
@@ -52,6 +61,9 @@
                         <input class="inputFeilds" type="text" id="email" name="email" placeholder="Email">
                         <b>
                             <p class="error" id="emailErr"></p>
+                            <?php
+                             alerts(); 
+                             ?>
                         </b>
                     </div>
                     <!-- <br> -->
@@ -65,7 +77,7 @@
                 <!-- <br> -->
                 <div class="input_common divBtn">
                     <!-- <input id="submitBtn" class="btn btn-primary" type="submit" name="submit" value="Sign Up"> -->
-                    <button id="submitBtn" class="btn btn-primary" type="submit" name="submit" value="register_submit">Register</button>
+                    <button id="submitBtn" class="btn btn-primary" type="submit" name="submit_registration" value="register_submit">Register</button>
                 </div>
             </form>
             <p class="login_paragraph">Already have an account? <a href="login">Login</a></p>
