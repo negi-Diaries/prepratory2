@@ -24,3 +24,30 @@ function delete_box(id){
             window.location.href='delete?id='+id;
         }
 }
+
+function popup(popup_name){
+  console.log("popup is working");
+  let get_popup_id = document.getElementById(popup_name);
+  if (get_popup_id.style.display == "flex") {
+    // console.log(get_popup_id);
+    get_popup_id.style.display = "none";
+  } else {
+    get_popup_id.style.display = "flex";
+  }
+}
+
+
+// function popup(popup_name){
+//   console.log("popup is working");
+//   let get_popup_id = document.getElementById(popup_name);
+//   if(get_popup_id.style.display == "flex")
+//   // console.log(get_popup_id);
+//   get_popup_id.style.display = "none";
+//   } else{
+//   get_popup_id.style.display = "flex";
+// }
+
+
+
+
+

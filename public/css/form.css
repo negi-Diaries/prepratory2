@@ -76,3 +76,7 @@ body{
 .forgot_pass{
     text-decoration: none;
 }
+
+#email_success{
+    color:green;
+}

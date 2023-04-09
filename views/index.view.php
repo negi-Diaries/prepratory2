@@ -1,5 +1,5 @@
 <?php
-if(!$_SESSION['password']){
+if(!$_SESSION['logged_in'] && $_SESSION['logged_in'] != true){
     header('location: login');
 }
 ?>
@@ -14,7 +14,7 @@ if(!$_SESSION['password']){
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <?php require 'views/partials/fonts.php' ?>
+    <?php require 'views/partials/fonts.php' ?>
     <link rel="stylesheet" href="public/index.css">
 
 </head>
@@ -22,7 +22,7 @@ if(!$_SESSION['password']){
 <body>
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
-                    <a class="navbar-brand" href="home"><img class="coloured_cow_img" src="public/logo/open_library.svg"
+            <a class="navbar-brand" href="home"><img class="coloured_cow_img" src="public/logo/open_library.svg"
                     alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -44,11 +44,27 @@ if(!$_SESSION['password']){
 
                 </form>
                 <?php show_reset_btn(); ?>
-                <a class="btn btn-primary btn_wide mx-2" href="logout">Logout</a>
-                <!-- <button type="submit" class="btn btn-primary btn_wide" name='submit'>Edit</button>  -->
+                <div>
+                    <!-- <a class="btn btn-primary btn_wide mx-2" href="logout">Logout</a> -->
+                    <button  class="btn btn-primary btn_wide mx-2" onclick="popup('logout_popup')">Logout</button>
+                </div>
             </div>
         </div>
     </nav>
+    <!-- popup coding -->
+    <div id="logout_popup" class="popup_container">
+        <div class="popup">
+            <div class="popup_internal">
+                <div class="popup_h2_cancel">
+                    <h2>Are you sure you want to logout?<button class="cross_btn" onclick="popup('logout_popup')">X</button></h2>
+                </div>
+                <div class="logout_cancel_div">
+                <button class="btn btn-primary btn_wide mx-2" onclick="popup('logout_popup')">Cancel</button>
+                <a class="btn btn-primary btn_wide mx-2" href="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- notification box  -->
     <div class="notification_box">
         <!-- if someone clicks on the search box with an empty input then an alert will be shown up  -->
@@ -60,26 +76,28 @@ if(!$_SESSION['password']){
 
     <!-- sorting section starts  -->
     <div>
-    <div class="container  sort_add_btn">
-        <form class="sorting_form" action="home" method="GET">
-            <div class="input-group">
-                <select name="sort_alphabet" class="form-control select">
-                    <option>--sort--</option>
-                    <option value="a-z"
-                        <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet'] == 'a-z'){ echo "selected";} ?>>
-                        A-Z(Ascending Order)</option>
-                    <option value="z-a"
-                        <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet'] == 'z-a'){ echo "selected";} ?>>
-                        Z-A(Descending Order)</option>
-                </select>
-                <button type="submit" class="input-group-text btn btn-primary" id="basic-addon2">Filter</button>
-            </div>
-        </form>
-        <div>
-            <form action="addbook" method="GET">
-                <button class="add_book btn btn-primary" type="submit" class="btn btn-primary ">Add a Book</button>
+        <div class="container  sort_add_btn">
+            <form class="sorting_form" action="home" method="GET">
+                <!-- romoved input-group from sorting_filter div as it was creating proble in popup  -->
+                <div class="sorting_filter">
+                    <select name="sort_alphabet" class="form-control select filter_select">
+                        <option>--sort--</option>
+                        <option value="a-z"
+                            <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet'] == 'a-z'){ echo "selected";} ?>>
+                            A-Z(Ascending Order)</option>
+                        <option value="z-a"
+                            <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet'] == 'z-a'){ echo "selected";} ?>>
+                            Z-A(Descending Order)</option>
+                    </select>
+                    <button type="submit" class="input-group-text fitler_btn btn btn-primary"
+                        id="basic-addon2">Filter</button>
+                </div>
             </form>
-        </div>
+            <div>
+                <form action="addbook" method="GET">
+                    <button class=" add_book btn btn-primary" type="submit" class="btn btn-primary ">Add a Book</button>
+                </form>
+            </div>
         </div>
     </div>
     </div>
@@ -97,36 +115,36 @@ if(!$_SESSION['password']){
         <?php
            foreach ($data as $item): 
           ?>
-        <div class="card my-4 " style="width: 18rem;">
+        <!-- i have removed card class as it was creating problem in popup section  -->
+        <div class=" my-4 " style="width: 18rem;">
             <img class="book_img" src="<?php echo $item['img_source']; ?>" class="card-img-top" alt="...">
             <h4 class="bookNamecenter my-1"><span></span><?php echo $item['book_name']; ?></h4>
             <div class="more">
-                </div>
-                <span>author:</span>
-                <h5 class="card-title"><?php echo $item['author']; ?></h5>
-                <div class="book_details">
-                    <!-- <form action="readmore?id=<?php echo $item['id']; ?>" method="POST"> -->
-                        <a href="readmore?id=<?php  echo $item['id']; ?>">Book details</a>
-                        <!-- <input type="submit" name="submit" value="Book Details"> -->
-                        <!-- <a href="readmore?id=<?php// echo $item['id']; ?>">Book details</a> -->
+                <!-- here is the more section  -->
+            </div>
+            <span>author:</span>
+            <h5 class="card-title"><?php echo $item['author']; ?></h5>
+            <div class="book_details">
+                <!-- <form action="readmore?id=<?php echo $item['id']; ?>" method="POST"> -->
+                <a href="readmore?id=<?php  echo $item['id']; ?>">Book details</a>
+                <!-- <input type="submit" name="submit" value="Book Details"> -->
+                <!-- <a href="readmore?id=<?php// echo $item['id']; ?>">Book details</a> -->
 
-                    <!-- </form> -->
-                </div>
+                <!-- </form> -->
+            </div>
         </div>
         <?php 
             endforeach; ?>
     </div>
+
     <!-- pagination starts from here -->
     <div class="container flexable">
         <?php
-    require 'controllers/pagination_links.php';
+         require 'controllers/pagination_links.php';
     ?>
     </div>
     <!--  pagination ends -->
-    
-
-
-
+    <script src="public/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous">
     </script>

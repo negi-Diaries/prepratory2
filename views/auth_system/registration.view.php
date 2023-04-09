@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['password'])){
+if(isset($_SESSION['logged_in'])){
     header('location: home');
 }
 ?>
@@ -51,6 +51,7 @@ if(isset($_SESSION['password'])){
             <form class="form form_container" action="code" method="post" name="userLogin" onsubmit="return formValidation()">
                 <div class="mainHeading">
                     <div class="input_common">
+
                         <input class="inputFeilds" type="text" id="name" name="name" placeholder="Name">
                         <b>
                             <p class="error" id="nameErr"></p>
@@ -61,9 +62,6 @@ if(isset($_SESSION['password'])){
                         <input class="inputFeilds" type="text" id="email" name="email" placeholder="Email">
                         <b>
                             <p class="error" id="emailErr"></p>
-                            <?php
-                             alerts(); 
-                             ?>
                         </b>
                     </div>
                     <!-- <br> -->
@@ -74,6 +72,9 @@ if(isset($_SESSION['password'])){
                         </b>
                     </div>
                 </div>
+                <?php
+                alerts(); 
+                ?>
                 <!-- <br> -->
                 <div class="input_common divBtn">
                     <!-- <input id="submitBtn" class="btn btn-primary" type="submit" name="submit" value="Sign Up"> -->

@@ -129,38 +129,77 @@ class querybuilder{
 // from here the user registration/ login and forgot password starts 
 
         //   to check if the email is registered or not
-        public function is_email_registered($email){
+        public function is_email_registered_count($email){
             $check_email_query = "SELECT email FROM users WHERE email = :email";
             $statement = $this->pdo->prepare($check_email_query);
             $statement->execute([
                 ':email'=>$email
             ]);
-            $result = $statement->fetch();
-            return $result;
+            $count = $statement->rowCount();
+            return $count;
         }
 
-        public function add_new_user($name,$email,$password){
-            $insert_user_data = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+        // adding new user
+        public function add_new_user($name,$email,$password,$verification_code,$is_verified){
+            $insert_user_data = "INSERT INTO users (name, email, password, verification_code, is_verified) VALUES (:name, :email, :password, :verification_code, :is_verified)";
             $statement = $this->pdo->prepare($insert_user_data);
-            $statement->execute([
-                ':name' => $email,
+            $result =  $statement->execute([
+                ':name' => $name,
                 ':email' => $email,
-                ':password' => $password
+                ':password' => $password,
+                ':verification_code' => $verification_code,
+                ':is_verified' => $is_verified
             ]);
-            $result = $statement->fetch();
             return $result;
         }
 
-        public function authenticate_user_password($email,$password){
-            $query = "SELECT email, password FROM users WHERE email = :email AND password = :password";
+        // login check password
+        public function is_email_registered($email){
+            $query = "SELECT * FROM users WHERE email = :email";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([
+                ':email' => $email
+            ]);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        // email data verification and fetching details by email and v_code 
+        public function email_verification($email, $v_code){
+            $query = "SELECT * FROM users WHERE email = :email AND verification_code = :v_code";
             $statement = $this->pdo->prepare($query);
             $statement->execute([
                 ':email' => $email,
-                ':password' => $password
+                ':v_code' => $v_code
             ]);
-            $result = $statement->fetchAll();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
-        }
+        } 
 
+        // markin the isverified as 1 
+        public function mark_email_verified($email){
+            $query = "UPDATE users SET is_verified = 1 WHERE email = :email";
+            $statement = $this->pdo->prepare($query);
+            $result = $statement->execute([
+                ':email' => $email
+            ]);
+            return $result;
+        } 
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

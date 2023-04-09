@@ -239,4 +239,73 @@ h3{
  
   }
 
-  
+  .sorting_filter{
+    display: flex;
+    flex-direction: row;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .fitler_btn{
+    border-radius: 0 5px 5px 0;
+  }
+
+  .filter_select{
+    border-radius: 5px 0 0 5px;
+  }
+
+  /* popUP section starts from here  */
+
+  .popup_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0 , 0, 0.8);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+
+  div.popup_container div.popup{
+    background-color: #f0f0f0;
+    padding: 25px;
+    border-radius: 10px;
+    /* height: 200px; */
+  }
+
+  div.popup_container div.popup  .popup_internal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div.popup_container div.popup  .logout_cancel_div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  div.popup_container div.popup .popup_h2_cancel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cross_btn{
+    margin-left: 10px;
+    border: none;
+    font-weight: 600;
+    /* font-family: sans-serif; */
+    /* font-size: 18px; */
+    color: #797775;
+  }
+
+
+  /* pop container ends  */

@@ -48,6 +48,21 @@ unset($_SESSION['register_success']);
     <strong>".$_SESSION['login_successful']."<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
     </div>";
 unset($_SESSION['login_successful']);
+}else if(isset($_SESSION['wrong_password'])){
+    echo "<p class='error' id='emailErr'>".$_SESSION['wrong_password']."</p>";
+    unset($_SESSION['wrong_password']);
+}else if(isset($_SESSION['server_down'])){
+    echo "<p class='error' id='emailErr'>".$_SESSION['server_down']."</p>";
+    unset($_SESSION['server_down']);
+}else if(isset($_SESSION['account_verified'])){
+    echo "<p class='error' id='email_success'>".$_SESSION['account_verified']."</p>";
+    unset($_SESSION['account_verified']);
+}else if(isset($_SESSION['verify_email'])){
+    echo "<p class='error' id='email_success'>".$_SESSION['verify_email']."</p>";
+    unset($_SESSION['verify_email']);
+}else if(isset($_SESSION['not_verified'])){
+    echo "<p class='error' id='emailErr'>".$_SESSION['not_verified']."</p>";
+    unset($_SESSION['not_verified']);
 }
 // echo "end of the alert box";    
 }

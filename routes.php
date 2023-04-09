@@ -7,6 +7,7 @@ $router->get('login', 'controllers/auth/login.php');
 $router->get('forgot_password', 'controllers/auth/forgot_pass.php');
 $router->post('code', 'controllers/auth/code.php');
 $router->get('logout', 'controllers/auth/logout.php');
+$router->get('email_verification', 'controllers/auth/email_verification.php');
 
 
 
