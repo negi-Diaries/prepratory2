@@ -80,3 +80,7 @@ body{
 #email_success{
     color:green;
 }
+
+.forgot_password{
+    height: 15rem;
+}

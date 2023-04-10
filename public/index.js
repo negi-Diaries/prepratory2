@@ -17,7 +17,7 @@ function getImagepreview(event){
 }
 
 function delete_box(id){
-  let confirmDelete =  confirm('are you sure you want to Delete this');
+  let confirmDelete =  confirm('Are you sure you want to Delete this');
   console.log(confirmDelete);
   console.log(id);
   if(confirmDelete){

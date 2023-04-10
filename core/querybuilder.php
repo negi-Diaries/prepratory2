@@ -184,7 +184,32 @@ class querybuilder{
                 ':email' => $email
             ]);
             return $result;
-        } 
+        }
+        
+        // insert token and date
+        public function update_reset_token_and_expiration($token, $date,$email){
+            $query = "UPDATE users SET reset_token = :token, reset_token_expired = :reset_token_expired WHERE email = :email";
+            $statement = $this->pdo->prepare($query);
+            $result = $statement->execute([
+                ':token' => $token,
+                ':reset_token_expired' => $date,
+                ':email' => $email
+            ]);
+            return $result;
+        }
+
+        // update password
+         public function update_password($email,$updated_password){
+            $query = "UPDATE users SET password = :updated_password, reset_token = :token, reset_token_expired = :reset_token_expired WHERE email = :email";
+            $statement = $this->pdo->prepare($query);
+            $result = $statement->execute([
+                ':updated_password'=> $updated_password,
+                ':token' => NULL,
+                ':reset_token_expired' => NULL,
+                ':email' => $email
+            ]);
+            return $result;
+        }
 }
 ?>
 

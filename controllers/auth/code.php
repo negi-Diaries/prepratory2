@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// sendMail function starts 
+// sendMail function  
 function sendMail($email_mail,$v_code_mail){
     require('PHPMailer/Exception.php');
     require('PHPMailer/SMTP.php');
@@ -21,7 +21,7 @@ function sendMail($email_mail,$v_code_mail){
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'vn03485@gmail.com';                     //SMTP username
         //Its always At remove the passkey when you are uploading it Top to the github as anyone can access it
-        $mail->Password   = '';                               //SMTP password
+        $mail->Password   = 'dfyhwxvzbgcigime';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
@@ -47,7 +47,7 @@ function sendMail($email_mail,$v_code_mail){
         // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
-// send mail function ends 
+
 
 //  for sign up registaration
 if(isset($_POST['submit_registration'])){
@@ -109,7 +109,6 @@ if(isset($_POST['login_submit'])){
                 session_start();
                 $_SESSION['login_successful'] = 'Login Successful';
                 $_SESSION['logged_in'] = true;
-                $_SESSION['logged_in'] = $password;
                 header('location: home');
             }else{
                 session_start();
@@ -127,13 +126,121 @@ if(isset($_POST['login_submit'])){
             }
             // if there are more than one users the we will perform this statement
         }else if($row_count>1){
-            echo "please contact to the customer care as there are multiple accounts with the same email ";
+            echo "Please contact to the customer care as there are multiple accounts with the same email ";
         }
 
     }else{
         session_start();
         $_SESSION['wrong_empass'] = 'wrong email entered';
         header('location: login');
+    }
+}
+
+// forgot mail 
+function sendForPassMail($email_mail,$reset_token_mail){
+    require('PHPMailer/Exception.php');
+    require('PHPMailer/SMTP.php');
+    require('PHPMailer/PHPMailer.php');
+
+    $mail = new PHPMailer(true);
+
+    try {
+        // dfyhwxvzbgcigime
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'vn03485@gmail.com';                     //SMTP username
+        //Its always At remove the passkey when you are uploading it Top to the github as anyone can access it
+        $mail->Password   = 'dfyhwxvzbgcigime';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('vn03485@gmail.com', 'OPEN LIBRARY');
+        $mail->addAddress($email_mail);     //Add a recipient
+    
+    
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Password Reset Link From Open Library';
+        $mail->Body    = "We got a request from you to reset your password.
+        <br> Click the link to verify the email address and change the password
+        <a href='http://localhost/prepratory2/forgot_pass_verification?forgot_email=$email_mail&reset_token=$reset_token_mail'>Verify</a>
+        ";
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+        $mail->send();
+        // echo 'Message has been sent';
+        return true;
+    } catch (Exception $e) {
+        return false;
+        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
+// code for forgot password 
+if(isset($_POST['forgot_submit'] )){
+    $email = $_POST['email'];
+    $search_email = $app['queries']->is_email_registered($email);
+    if($search_email){
+        $row_count = count($search_email);
+        // check if there is a single row or multiple rows 
+        if($row_count == 1){
+            // from here the main code will implemented 
+            echo '<pre>';
+            print_r($search_email);
+            $reset_token = bin2hex(random_bytes(16));
+            date_default_timezone_set('Asia/kolkata');
+            $current_time = date("Y-m-d H:i:s", time());
+            // echo "under thiss";
+            // echo date("Y-m-d H:i:s",strtotime(date("Y-m-d H:i:s", time())));
+
+            // $updated_time = date("Y-m-d H:i:s", strtotime("+2 hours", strtotime($current_time)));
+            echo $current_time;
+            // now insert the token and date for token expiration                                                
+            $update_reset_token_and_expiration = $app['queries']->update_reset_token_and_expiration($reset_token,$current_time,$email);
+            // now check if its true or not 
+            if(isset($update_reset_token_and_expiration) && sendForPassMail($email,$reset_token)){
+                session_start();
+                $_SESSION['forgot_mail'] = "Please check your mail and verify";
+                header('location: forgot_password');
+                // echo "query updated successfully <br>";
+
+            }else{
+                session_start();
+                $_SESSION['server_down'] = "Server down, data cannot be processed";
+                header('location: forgot_password');
+            }
+            
+            
+            
+        }else if($row_count>1){
+            echo "Please contact to the customer care as there are multiple accounts with the same email.";
+        }
+    }else{
+        session_start();
+        $_SESSION['wrong_empass'] = 'wrong email entered';
+        header('location: forgot_password');
+    }
+}
+
+// code for new password
+if(isset($_POST['update_password_submit'])){
+    $email = $_POST['email'];
+    $updated_password = $_POST['update_password'];
+    $update_password = $app['queries']->update_password($email,$updated_password);
+    if($update_password){
+        echo "password has been updated successfully";
+        session_start();
+        $_SESSION['password_updated'] = 'Password updated successfully';
+        header('location: login');
+    }else{
+        echo "query not updated ";
+        session_start();
+        $_SESSION['server_down'] = "Server down, data cannot be processed";
+        header('location: forgot_password');
     }
 }
 

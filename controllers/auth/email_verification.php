@@ -17,9 +17,7 @@ if(isset($_GET['email']) && isset($_GET['v_code'])){
             $mark_email_verified = $app['queries']->mark_email_verified($email);
             // another is for checking if the email is now verified or not 
             if($mark_email_verified){
-                // now the account is verified 
-                // echo "<h2>your account is verified</h2>";
-                // echo "<h3>Go to the login page to login <a href='login'>Login</a></h3>";
+                // now the account is verified
                 session_start();
                 $_SESSION['account_verified'] = "Your account is verified, please login.";
                 header('location: login');
@@ -41,7 +39,6 @@ if(isset($_GET['email']) && isset($_GET['v_code'])){
         echo "Invalid email and verification code";
     }
 }
-
 
 ?>
 

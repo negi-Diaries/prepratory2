@@ -21,10 +21,10 @@ const formValidation = ()=> {
         setError("emailErr", "*Email cannot be blank");
         validationValue = false;
     } else if (!email.includes('@')) {
-        setError("emailErr", "*should have an @ ");
+        setError("emailErr", "*Should have an @ ");
         validationValue = false;
     } else if (!email.includes('.com')) {
-        setError("emailErr", "*should have .com at the last")
+        setError("emailErr", "*Should have .com at the last")
         validationValue = false;
     }
     // else if(email.includes('')){
@@ -45,7 +45,7 @@ const formValidation = ()=> {
     // }
 
     if (password.length < 8) {
-        setError("passwordErr", "*password length should be more than 8 characters")
+        setError("passwordErr", "*Password length should be more than 8 characters")
         validationValue = false;
     }
 
@@ -81,15 +81,15 @@ const formValidationLogin = ()=> {
         setError("emailErr", "*Email cannot be blank");
         validationValue = false;
     } else if (!email.includes('@')) {
-        setError("emailErr", "*should have an @ ");
+        setError("emailErr", "*Should have an @ ");
         validationValue = false;
     } else if (!email.includes('.com')) {
-        setError("emailErr", "*should have .com at the last")
+        setError("emailErr", "*Should have .com at the last")
         validationValue = false;
     }
 
     if (password.length < 8) {
-        setError("passwordErr", "*password length should be more than 8 characters")
+        setError("passwordErr", "*Password length should be more than 8 characters")
         validationValue = false;
     }
 
@@ -106,15 +106,30 @@ function formValidationForgotPassword(){
         setError("emailErr", "*Email cannot be blank");
         validationValue = false;
     } else if (!email.includes('@')) {
-        setError("emailErr", "*should have an @ ");
+        setError("emailErr", "*Should have an @ ");
         validationValue = false;
     } else if (!email.includes('.com')) {
-        setError("emailErr", "*should have .com at the last")
+        setError("emailErr", "*Should have .com at the last")
         validationValue = false;
     }
 
     return validationValue;
 }
+
+
+function formValidationNewPassword(){
+    console.log('login working');
+    clearError();
+    let validationValue = true;
+    let password = document.getElementById('password').value;
+    if (password.length < 8) {
+        setError("passwordErr", "*Password length should be more than 8 characters")
+        validationValue = false;
+    }
+
+    return validationValue;
+}
+
 
 
 

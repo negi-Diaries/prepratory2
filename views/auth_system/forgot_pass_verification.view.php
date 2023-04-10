@@ -41,31 +41,28 @@ if(isset($_SESSION['logged_in'])){
         </div>
     </nav>
     <div class="formDiv">
-        <div class="formDiv_internal">
-            <h3 class="mainHeading">Forgot Password</h3>
-            <p class="genres">Please provide your email so that we can send you a confirmation link.</p>
-            <form class="form form_container" action="code" method="POST" name="userLogin"
-                onsubmit="return formValidationForgotPassword()">
+        <div class="formDiv_internal forgot_password">
+            <h3 class="mainHeading">Enter New Password</h3>
+            <p class="genres">Please Enter a new password and don't forgot this time.</p>
+            <form class="form form_container" action="code" method="post" name="userLogin"
+                onsubmit="return formValidationNewPassword()">
                 <div class="mainHeading">
                     <div class="input_common">
-                        <input class="inputFeilds" type="text" id="email" name="email" placeholder="Email">
+                        <input class="inputFeilds" type="password" name="update_password" placeholder="Password" id="password">
                         <b>
-                            <p class="error" id="emailErr"></p>
+                            <p class="error" id="passwordErr"></p>
                         </b>
                     </div>
                     <!-- <br> -->
                 </div>
-                <?php
-                // session_start();
-                    alerts();   
-                ?>
+                <input type="hidden" name="email" value="<?php echo $email; ?>">
+
                 <div class="input_common divBtn">
                     <!-- <input id="submitBtn" class="btn btn-primary" type="submit" name="submit" value="Sign Up"> -->
-                    <button id="submitBtn" class="btn btn-primary" type="submit" name="forgot_submit"
+                    <button id="submitBtn" class="btn btn-primary" type="submit" name="update_password_submit"
                         value="forgot_submit">Send link</button>
                 </div>
             </form>
-            <p class="login_paragraph">Don't have an account? <a href="signup">Sign Up</a></p>
         </div>
     </div>
     <script src="public/script/form.js"></script>

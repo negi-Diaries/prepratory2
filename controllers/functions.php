@@ -63,8 +63,18 @@ unset($_SESSION['login_successful']);
 }else if(isset($_SESSION['not_verified'])){
     echo "<p class='error' id='emailErr'>".$_SESSION['not_verified']."</p>";
     unset($_SESSION['not_verified']);
+}else if(isset($_SESSION['forgot_mail'])){
+    echo "<p class='error' id='email_success'>".$_SESSION['forgot_mail']."</p>";
+    unset($_SESSION['forgot_mail']);
+}else if(isset($_SESSION['session_out'])){
+    echo "<p class='error' id='emailErr'>".$_SESSION['session_out']."</p>";
+    unset($_SESSION['session_out']);
+}else if(isset($_SESSION['password_updated'])){
+    echo "<p class='error' id='email_success'>".$_SESSION['password_updated']."</p>";
+    unset($_SESSION['password_updated']);
 }
 // echo "end of the alert box";    
+
 }
 
 function show_reset_btn(){
